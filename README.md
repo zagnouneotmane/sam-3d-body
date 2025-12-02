@@ -104,12 +104,20 @@ You can also run our demo script for model inference and visualization:
 # Download assets from HuggingFace
 hf download facebook/sam-3d-body-dinov3 --local-dir checkpoints/sam-3d-body-dinov3
 
-# Run demo script
+# Run demo script with default ViTdet detector and MoGe2 FOV model
 python demo.py \
     --image_folder <path_to_images> \
     --output_folder <path_to_output> \
     --checkpoint_path ./checkpoints/sam-3d-body-dinov3/model.ckpt \
     --mhr_path ./checkpoints/sam-3d-body-dinov3/assets/mhr_model.pt
+
+# To use SAM3 as the detector to align with online playground of SAM3D
+python demo.py \
+    --image_folder <path_to_images> \
+    --output_folder <path_to_output> \
+    --checkpoint_path ./checkpoints/sam-3d-body-dinov3/model.ckpt \
+    --mhr_path ./checkpoints/sam-3d-body-dinov3/assets/mhr_model.pt \
+    --detector_name sam3
 ```
 
 For a complete demo with visualization, see [notebook/demo_human.ipynb](notebook/demo_human.ipynb).
