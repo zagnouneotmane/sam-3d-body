@@ -1,0 +1,2 @@
+# Ensure setuptools_scm can find version tags
+*.py linguist-language=Python
