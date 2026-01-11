@@ -6,19 +6,16 @@ from PIL import Image
 
 
 class HumanSegmentor:
-    def __init__(self, name="sam2", sam_segmentor=None, device="cuda", **kwargs):
+    def __init__(self, name="sam2", device="cuda", **kwargs):
         self.device = device
 
-        if sam_segmentor is not None and name == "sam2":
+        if name == "sam2":
             print("########### Using human segmentor: SAM2...")
-            self.sam = sam_segmentor
-            self.sam = self.sam.to(self.device)
-            self.sam.eval()
+            self.sam = load_sam2(device, **kwargs)
             self.sam_func = run_sam2
-        elif sam_segmentor is not None and name == "sam3":
+        elif name == "sam3":
             print("########### Using human segmentor: SAM3...")
-            self.sam = sam_segmentor
-            self.sam = self.sam.to(self.device)
+            self.sam = load_sam3(device, **kwargs)
             self.sam_func = run_sam3
         else:
             raise NotImplementedError

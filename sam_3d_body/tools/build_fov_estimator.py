@@ -9,10 +9,9 @@ class FOVEstimator:
 
         if fov_estimator is not None:
             print("########### Using fov estimator: MoGe2...")
-            self.fov_estimator = fov_estimator
-            self.fov_estimator_func = run_moge
-
+            self.fov_estimator = fov_estimator.to(self.device)
             self.fov_estimator.eval()
+            self.fov_estimator_func = run_moge
         else:
             raise NotImplementedError
 

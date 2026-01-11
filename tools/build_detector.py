@@ -9,25 +9,22 @@ from PIL import Image
 
 
 class HumanDetector:
-    def __init__(self, name="vitdet", detector=None, processor=None, device="cuda", **kwargs):
+    def __init__(self, name="vitdet", device="cuda", **kwargs):
         self.device = device
 
-        if detector is not None and name == "vitdet":
+        if name == "vitdet":
             print("########### Using human detector: ViTDet...")
-            self.detector = detector
+            self.detector = load_detectron2_vitdet(**kwargs)
             self.detector_func = run_detectron2_vitdet
 
             self.detector = self.detector.to(self.device)
             self.detector.eval()
-        elif detector is not None and name == "sam3" and processor is not None:
-            print("########### Using human detector: SAM3...")
-            # from sam3.model_builder import build_sam3_image_model
-            # from sam3.model.sam3_image_processor import Sam3Processor
+        elif name == "sam3":
+            from sam3.model_builder import build_sam3_image_model
+            from sam3.model.sam3_image_processor import Sam3Processor
             
-            # self.detector = build_sam3_image_model()
-            self.detector = detector
-            # self.processor = Sam3Processor(self.detector)
-            self.processor = processor
+            self.detector = build_sam3_image_model()
+            self.processor = Sam3Processor(self.detector)
             self.detector_func = lambda detector, img, **kwargs: self.sam3_run(
                 img, **kwargs
             )

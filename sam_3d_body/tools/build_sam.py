@@ -12,13 +12,11 @@ class HumanSegmentor:
         if sam_segmentor is not None and name == "sam2":
             print("########### Using human segmentor: SAM2...")
             self.sam = sam_segmentor
-            self.sam = self.sam.to(self.device)
             self.sam.eval()
             self.sam_func = run_sam2
         elif sam_segmentor is not None and name == "sam3":
             print("########### Using human segmentor: SAM3...")
             self.sam = sam_segmentor
-            self.sam = self.sam.to(self.device)
             self.sam_func = run_sam3
         else:
             raise NotImplementedError

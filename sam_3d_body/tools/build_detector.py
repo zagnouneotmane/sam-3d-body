@@ -14,11 +14,9 @@ class HumanDetector:
 
         if detector is not None and name == "vitdet":
             print("########### Using human detector: ViTDet...")
-            self.detector = detector
-            self.detector_func = run_detectron2_vitdet
-
-            self.detector = self.detector.to(self.device)
+            self.detector = detector.to(self.device)
             self.detector.eval()
+            self.detector_func = run_detectron2_vitdet
         elif detector is not None and name == "sam3" and processor is not None:
             print("########### Using human detector: SAM3...")
             # from sam3.model_builder import build_sam3_image_model
