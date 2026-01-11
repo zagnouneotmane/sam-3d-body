@@ -17,22 +17,24 @@ from sam_3d_body.data.utils.io import load_image
 from sam_3d_body.data.utils.prepare_batch import prepare_batch
 from sam_3d_body.utils import recursive_to
 from torchvision.transforms import ToTensor
-
+from ..tools.build_detector import HumanDetector
+from ..tools.build_sam import HumanSegmentor
+from ..tools.build_fov_estimator import FOVEstimator
 
 class SAM3DBodyEstimator:
     def __init__(
         self,
         sam_3d_body_model,
         model_cfg,
-        human_detector=None,
-        human_segmentor=None,
-        fov_estimator=None,
+        human_detector: HumanDetector = None,
+        human_segmentor: HumanSegmentor = None,
+        fov_estimator: FOVEstimator = None,
     ):
         self.device = sam_3d_body_model.device
         self.model, self.cfg = sam_3d_body_model, model_cfg
-        self.detector = human_detector
-        self.sam = human_segmentor
-        self.fov_estimator = fov_estimator
+        self.detector = HumanDetector(detector=human_detector, device=self.device)
+        self.sam = HumanSegmentor(sam_segmentor=human_segmentor, device=self.device)
+        self.fov_estimator = FOVEstimator(fov_estimator=fov_estimator, device=self.device)
         self.thresh_wrist_angle = 1.4
 
         # For mesh visualization

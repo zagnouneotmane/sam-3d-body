@@ -4,12 +4,12 @@ import torch
 
 
 class FOVEstimator:
-    def __init__(self, name="moge2", device="cuda", **kwargs):
+    def __init__(self, name="moge2", fov_estimator=None, device="cuda", **kwargs):
         self.device = device
 
-        if name == "moge2":
+        if fov_estimator is not None:
             print("########### Using fov estimator: MoGe2...")
-            self.fov_estimator = load_moge(device, **kwargs)
+            self.fov_estimator = fov_estimator
             self.fov_estimator_func = run_moge
 
             self.fov_estimator.eval()
