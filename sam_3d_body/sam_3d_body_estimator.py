@@ -17,9 +17,9 @@ from sam_3d_body.data.utils.io import load_image
 from sam_3d_body.data.utils.prepare_batch import prepare_batch
 from sam_3d_body.utils import recursive_to
 from torchvision.transforms import ToTensor
-from ..tools.build_detector import HumanDetector
-from ..tools.build_sam import HumanSegmentor
-from ..tools.build_fov_estimator import FOVEstimator
+from .tools.build_detector import HumanDetector
+from .tools.build_sam import HumanSegmentor
+from .tools.build_fov_estimator import FOVEstimator
 
 class SAM3DBodyEstimator:
     def __init__(
