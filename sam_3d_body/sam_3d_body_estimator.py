@@ -32,9 +32,9 @@ class SAM3DBodyEstimator:
     ):
         self.device = sam_3d_body_model.device
         self.model, self.cfg = sam_3d_body_model, model_cfg
-        self.detector = HumanDetector(detector=human_detector, device=self.device)
-        self.sam = HumanSegmentor(sam_segmentor=human_segmentor, device=self.device)
-        self.fov_estimator = FOVEstimator(fov_estimator=fov_estimator, device=self.device)
+        self.detector = HumanDetector(detector=human_detector, device=self.device) if human_detector is not None else None
+        self.sam = HumanSegmentor(sam_segmentor=human_segmentor, device=self.device) if human_segmentor is not None else None
+        self.fov_estimator = FOVEstimator(fov_estimator=fov_estimator, device=self.device) if fov_estimator is not None else None
         self.thresh_wrist_angle = 1.4
 
         # For mesh visualization
